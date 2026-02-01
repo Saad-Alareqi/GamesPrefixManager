@@ -1,0 +1,20 @@
+{
+    "name": "games-prefix-manager",
+    "version": "1.0.0",
+    "description": "Manage Steam Deck Prefixes",
+    "scripts": {
+        "build": "decky-plugin-build",
+        "watch": "decky-plugin-build --watch"
+    },
+    "dependencies": {
+        "decky-frontend-lib": "^3.0.0",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0"
+    },
+    "devDependencies": {
+        "@types/react": "^16.9.0",
+        "@types/react-dom": "^16.9.0",
+        "decky-plugin-build": "^1.0.0",
+        "typescript": "^4.0.0"
+    }
+}

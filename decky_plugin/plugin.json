@@ -1,0 +1,11 @@
+{
+  "name": "Games Prefix Manager",
+  "author": "Antigravity",
+  "flags": ["root"],
+  "publish": {
+    "tags": ["utilities"],
+    "description": "Manage Steam Deck Prefixes, delete orphans, and backup data.",
+    "image": "assets/icon.png"
+  },
+  "main": "main.py"
+}
