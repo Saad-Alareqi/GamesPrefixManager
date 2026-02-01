@@ -22,6 +22,10 @@ env/
 .idea/
 *.swp
 .DS_Store
+build.bat
+build.sh
+.gitignore
+.gitattributes
 
 # Logs
 *.log
