@@ -48,7 +48,7 @@ const ConfirmModal: VFC<{
                             onConfirm(false);
                             closeModal();
                         }}
-                        style={{ backgroundColor: "#d93025" }} // Red-ish
+                        style={{ backgroundColor: "#d93025" }}
                     >
                         Delete (No Backup)
                     </DialogButton>
@@ -180,16 +180,16 @@ const PrefixManagerModal: VFC<{ serverAPI: ServerAPI; closeModal?: () => void }>
         <ModalRoot onCancel={closeModal}>
             <div style={{ width: "100%", height: "100%", padding: "0", display: "flex", flexDirection: "column", overflow: "hidden" }}>
 
-                {/* Header Container */}
+                { }
                 <div style={{ padding: "20px 20px 0 20px", display: "flex", flexDirection: "column", gap: "10px" }}>
 
-                    {/* Header Row */}
+                    { }
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                         <h3 style={{ margin: 0 }}>Prefix Manager</h3>
                         <DialogButton style={{ width: "40px", padding: "10px" }} onClick={closeModal}>X</DialogButton>
                     </div>
 
-                    {/* Filter Row */}
+                    { }
                     <div>
                         <TextField
                             label="Filter Games"
@@ -198,7 +198,7 @@ const PrefixManagerModal: VFC<{ serverAPI: ServerAPI; closeModal?: () => void }>
                         />
                     </div>
 
-                    {/* Action Buttons Row */}
+                    { }
                     <div style={{ display: "flex", gap: "10px" }}>
                         <DialogButton onClick={fetchGames} disabled={loading} style={{ flex: 1, minWidth: "0" }}>
                             Refresh
@@ -222,7 +222,7 @@ const PrefixManagerModal: VFC<{ serverAPI: ServerAPI; closeModal?: () => void }>
 
                 {loading && <div style={{ textAlign: "center", padding: "10px" }}>Loading...</div>}
 
-                {/* Game List */}
+                { }
                 <div style={{ flex: 1, overflowY: "auto", marginTop: "15px", padding: "0 20px 20px 20px" }}>
                     {filteredGames.length === 0 && !loading && <div style={{ padding: "20px", textAlign: "center", border: "1px solid #444", borderRadius: "4px" }}>No games found.</div>}
 

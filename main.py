@@ -5,17 +5,17 @@ import struct
 import shutil
 import logging
 
-# Set up logging
+
 logger = logging.getLogger("GamesPrefixManager")
 
-# Constants
+
 DECK_HOME = "/home/deck"
 BACKUP_DIR = os.path.join(DECK_HOME, "Documents/PrefixBackups")
 SIZE_CACHE = {}
 
-# -------------------------
+
 # Standalone Helper Functions
-# -------------------------
+
 def get_folder_size(path):
     if path in SIZE_CACHE:
         return SIZE_CACHE[path]
@@ -118,7 +118,7 @@ def parse_nonsteam_shortcuts():
         return results
         
     pos = data.find(b'shortcuts\x00') + 10
-    if pos == 9: # not found (-1 + 10)
+    if pos == 9: 
         return results
 
     while pos < len(data):
@@ -198,17 +198,17 @@ def find_orphans(known_ids):
                 })
     return results
 
-# -------------------------
+
 # Plugin Class
-# -------------------------
+
 class Plugin:
     games = []
 
     async def get_games(self):
         global SIZE_CACHE
-        SIZE_CACHE = {} # Reset cache
+        SIZE_CACHE = {} 
         try:
-            # Ensure permissions allows deck user to see backups if we create them as root
+            
             if not os.path.exists(BACKUP_DIR):
                 try:
                     os.makedirs(BACKUP_DIR, exist_ok=True)
@@ -223,7 +223,7 @@ class Plugin:
             self.games = steam + nonsteam + orphans
             logger.info(f"Found {len(self.games)} games")
 
-            # DEBUG: If no games found, return a debug item so we know what's wrong
+           
             if not self.games:
                 internal_path = os.path.join(DECK_HOME, ".local/share/Steam")
                 exists = os.path.exists(internal_path)
