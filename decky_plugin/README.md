@@ -15,22 +15,37 @@ This is a Decky Loader plugin converted from the standalone python script. It al
 - [Decky Loader](https://github.com/SteamDeckHomebrew/decky-loader) installed on your Steam Deck.
 - Node.js and pnpm (for building).
 
-### Build
-1. Open a terminal in this directory.
-2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
-   (if you don't have pnpm, use `npm install` but Decky recommends pnpm)
-3. Build the plugin:
-   ```bash
-   npm run build
-   ```
-   This will create a `dist` folder and a `zip` file.
+### Build Environment
 
-### deploy
-Copy the `games-prefix-manager` folder (or the build output) to `~/homebrew/plugins/` on your Steam Deck.
-Or use the CLI if you have it set up.
+You can build this plugin on **Windows**, **Ubuntu**, or directly on the **Steam Deck**.
+
+#### Option A: Building on Windows (Recommended since you are already here)
+1. Install [Node.js](https://nodejs.org/).
+2. Open a command prompt/terminal in this folder.
+3. Install dependencies: `npm install`
+4. Build: `npm run build`
+5. The output zip will be in the `dist` folder. Transfer this zip or folder to your Deck.
+
+#### Option B: Building on Steam Deck
+Yes, you can build directly on the Deck!
+1. Switch to **Desktop Mode**.
+2. Open the terminal (Konsole).
+3. You need Node.js. The easiest way without unlocking the filesystem is using **nvm**:
+   ```bash
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+   source ~/.bashrc
+   nvm install node
+   ```
+4. Clone or copy these files to your Deck.
+5. Ran `npm install` and `npm run build` inside the directory.
+
+#### Option C: Ubuntu
+Same as Windows/Deck. Just ensure `node` and `npm` are installed (`sudo apt install nodejs npm`).
+
+### Deploy
+Copy the `dist` folder (rename it to `games-prefix-manager` if needed) to:
+`/home/deck/homebrew/plugins/games-prefix-manager`
+Restart your Steam Deck (or the Decky Loader service).
 
 ## Development
 - `main.py`: Backend logic (Python).

@@ -3,18 +3,25 @@
     "version": "1.0.0",
     "description": "Manage Steam Deck Prefixes",
     "scripts": {
-        "build": "decky-plugin-build",
-        "watch": "decky-plugin-build --watch"
+        "build": "rollup -c",
+        "watch": "rollup -c -w"
     },
     "dependencies": {
         "decky-frontend-lib": "^3.0.0",
         "react": "^16.14.0",
-        "react-dom": "^16.14.0"
+        "react-dom": "^16.14.0",
+        "react-icons": "^4.10.0"
     },
     "devDependencies": {
+        "@rollup/plugin-commonjs": "^25.0.0",
+        "@rollup/plugin-json": "^6.0.0",
+        "@rollup/plugin-node-resolve": "^15.0.0",
+        "@rollup/plugin-replace": "^5.0.0",
+        "@rollup/plugin-typescript": "^11.0.0",
         "@types/react": "^16.9.0",
         "@types/react-dom": "^16.9.0",
-        "decky-plugin-build": "^1.0.0",
-        "typescript": "^4.0.0"
+        "rollup": "^2.79.1",
+        "tslib": "^2.6.0",
+        "typescript": "^5.0.0"
     }
 }
