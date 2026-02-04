@@ -137,7 +137,7 @@ def parse_nonsteam_shortcuts():
                 
                 end_k = data.find(b'\x00', pos + 1)
                 if end_k == -1: break
-                key = data[pos+1:end_k].decode("utf-8", errors="ignore")
+                key = data[pos+1:end_k].decode("utf-8", errors="ignore").lower()
                 pos = end_k + 1
                 
                 if t == 0x01:
@@ -151,7 +151,7 @@ def parse_nonsteam_shortcuts():
                 else:
                     pos += 1
 
-            if "AppName" in current and "appid" in current:
+            if "appname" in current and "appid" in current:
                 appid = str(current["appid"])
                 prefix = os.path.join(DECK_HOME, f".local/share/Steam/steamapps/compatdata/{appid}")
                 exists = os.path.lexists(prefix)
@@ -160,13 +160,13 @@ def parse_nonsteam_shortcuts():
                 size = format_size(get_folder_size(prefix)) if exists else "-"
                 
                 results.append({
-                    "name": current["AppName"],
+                    "name": current["appname"],
                     "appid": appid,
                     "type": "Non-Steam",
                     "prefix_path": prefix,
                     "prefix_status": status,
                     "size": size,
-                    "install_path": current.get("Exe", "-")
+                    "install_path": current.get("exe", "-")
                 })
         except Exception as e:
             logger.error(f"Error parsing shortcuts: {e}")
