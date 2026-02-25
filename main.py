@@ -88,8 +88,10 @@ def parse_steam_games():
                 prefix = os.path.join(compat_root, appid)
                 
                 exists = os.path.lexists(prefix)
+                if not exists:
+                    continue
                 is_link = os.path.islink(prefix)
-                status = "Deleted" if not exists else "Symlink" if is_link else "Folder"
+                status = "Symlink" if is_link else "Folder"
                 size = format_size(get_folder_size(prefix)) if exists else "-"
                 
                 results.append({
@@ -155,8 +157,10 @@ def parse_nonsteam_shortcuts():
                 appid = str(current["appid"])
                 prefix = os.path.join(DECK_HOME, f".local/share/Steam/steamapps/compatdata/{appid}")
                 exists = os.path.lexists(prefix)
+                if not exists:
+                    continue
                 is_link = os.path.islink(prefix)
-                status = "Deleted" if not exists else "Symlink" if is_link else "Folder"
+                status = "Symlink" if is_link else "Folder"
                 size = format_size(get_folder_size(prefix)) if exists else "-"
                 
                 results.append({

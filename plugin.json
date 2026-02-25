@@ -1,7 +1,7 @@
 {
   "name": "Games Prefix Manager",
-  "author": "Antigravity",
-  "version": "1.0.0",
+  "author": "Saad Alareqi",
+  "version": "1.0.1",
   "flags": [
     "root"
   ],

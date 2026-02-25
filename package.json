@@ -1,6 +1,6 @@
 {
     "name": "games-prefix-manager",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Manage Steam Deck Prefixes",
     "scripts": {
         "build": "rollup -c",

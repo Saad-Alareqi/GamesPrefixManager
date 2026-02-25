@@ -10,6 +10,7 @@ import {
     Navigation,
     showModal,
     ModalRoot,
+    Focusable,
 } from "decky-frontend-lib";
 import React, { VFC, useState, useEffect, useMemo } from "react";
 
@@ -34,7 +35,7 @@ const ConfirmModal: VFC<{
             <div style={{ padding: "20px" }}>
                 <h3 style={{ marginBottom: "10px" }}>{title}</h3>
                 <p style={{ marginBottom: "20px", whiteSpace: "pre-wrap" }}>{message}</p>
-                <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}>
+                <Focusable style={{ display: "flex", flexDirection: "row", gap: "10px", justifyContent: "flex-end" }} flow-children="row">
                     <DialogButton
                         onClick={() => {
                             onConfirm(true);
@@ -48,12 +49,11 @@ const ConfirmModal: VFC<{
                             onConfirm(false);
                             closeModal();
                         }}
-                        style={{ backgroundColor: "#d93025" }}
                     >
                         Delete (No Backup)
                     </DialogButton>
                     <DialogButton onClick={closeModal}>Cancel</DialogButton>
-                </div>
+                </Focusable>
             </div>
         </ModalRoot>
     );
@@ -184,10 +184,10 @@ const PrefixManagerModal: VFC<{ serverAPI: ServerAPI; closeModal?: () => void }>
                 <div style={{ padding: "20px 20px 0 20px", display: "flex", flexDirection: "column", gap: "10px" }}>
 
                     { }
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <Focusable style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} flow-children="row">
                         <h3 style={{ margin: 0 }}>Prefix Manager</h3>
                         <DialogButton style={{ width: "40px", padding: "10px" }} onClick={closeModal}>X</DialogButton>
-                    </div>
+                    </Focusable>
 
                     { }
                     <div>
@@ -199,7 +199,7 @@ const PrefixManagerModal: VFC<{ serverAPI: ServerAPI; closeModal?: () => void }>
                     </div>
 
                     { }
-                    <div style={{ display: "flex", gap: "10px" }}>
+                    <Focusable style={{ display: "flex", flexDirection: "row", gap: "10px" }} flow-children="row">
                         <DialogButton onClick={fetchGames} disabled={loading} style={{ flex: 1, minWidth: "0" }}>
                             Refresh
                         </DialogButton>
@@ -217,7 +217,7 @@ const PrefixManagerModal: VFC<{ serverAPI: ServerAPI; closeModal?: () => void }>
                         >
                             Clean Orphans
                         </DialogButton>
-                    </div>
+                    </Focusable>
                 </div>
 
                 {loading && <div style={{ textAlign: "center", padding: "10px" }}>Loading...</div>}
@@ -270,7 +270,7 @@ const PrefixManagerModal: VFC<{ serverAPI: ServerAPI; closeModal?: () => void }>
                     </div>
                 </div>
             </div>
-        </ModalRoot>
+        </ModalRoot >
     );
 };
 
