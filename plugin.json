@@ -10,7 +10,7 @@
       "utilities"
     ],
     "description": "Manage Steam Deck Prefixes, delete orphans, and backup data.",
-    "image": "assets/icon.jpg"
+    "image": "https://raw.githubusercontent.com/Saad-Alareqi/GamesPrefixManager/main/assets/icon.jpg"
   },
   "main": "main.py"
 }
