@@ -2,7 +2,7 @@
 
 This is a Decky Loader plugin converted from my standalone python script. It allows you to manage Proton prefixes (compatdata) for Steam and Non-Steam games, including finding and deleting orphan prefixes.
 
-## Features
+## Features 
 - List all Steam and Non-Steam game prefixes, and their sizes.
 - Identify orphan prefixes (folders in compatdata that don't belong to any installed game).
 - Batch delete prefixes.
