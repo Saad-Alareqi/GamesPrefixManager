@@ -11,6 +11,7 @@ import {
     showModal,
     ModalRoot,
     Focusable,
+    ToggleField,
 } from "decky-frontend-lib";
 import React, { VFC, useState, useEffect, useMemo } from "react";
 
@@ -27,18 +28,38 @@ interface GameData {
 const ConfirmModal: VFC<{
     title: string;
     message: string;
-    onConfirm: (backup: boolean) => void;
+    onConfirm: (backup: boolean, deleteGameFolder: boolean) => void;
     closeModal: () => void;
-}> = ({ title, message, onConfirm, closeModal }) => {
+    showDeleteGameFolder?: boolean;
+    gamePath?: string;
+}> = ({ title, message, onConfirm, closeModal, showDeleteGameFolder = false, gamePath }) => {
+    const [deleteGameFolder, setDeleteGameFolder] = useState(false);
     return (
         <ModalRoot onCancel={closeModal}>
             <div style={{ padding: "20px" }}>
                 <h3 style={{ marginBottom: "10px" }}>{title}</h3>
                 <p style={{ marginBottom: "20px", whiteSpace: "pre-wrap" }}>{message}</p>
+                
+                {showDeleteGameFolder && (
+                    <div style={{ marginBottom: "20px" }}>
+                        <ToggleField
+                            label="Delete Game Data"
+                            description="Deletes the game install directory alongside the prefix."
+                            checked={deleteGameFolder}
+                            onChange={(val) => setDeleteGameFolder(val)}
+                        />
+                        {gamePath && (
+                            <div style={{ marginTop: "5px", padding: "8px", backgroundColor: "rgba(0,0,0,0.2)", borderRadius: "4px", fontSize: "0.85em", color: "#aaa", wordBreak: "break-all" }}>
+                                <strong>Path:</strong> {gamePath}
+                            </div>
+                        )}
+                    </div>
+                )}
+
                 <Focusable style={{ display: "flex", flexDirection: "row", gap: "10px", justifyContent: "flex-end" }} flow-children="row">
                     <DialogButton
                         onClick={() => {
-                            onConfirm(true);
+                            onConfirm(true, deleteGameFolder);
                             closeModal();
                         }}
                     >
@@ -46,7 +67,7 @@ const ConfirmModal: VFC<{
                     </DialogButton>
                     <DialogButton
                         onClick={() => {
-                            onConfirm(false);
+                            onConfirm(false, deleteGameFolder);
                             closeModal();
                         }}
                     >
@@ -119,12 +140,15 @@ const PrefixManagerModal: VFC<{ serverAPI: ServerAPI; closeModal?: () => void }>
                 title="Delete Selected"
                 message={`Delete ${toDelete.length} prefixes?\n\n${toDelete.map((g: GameData) => g.name).slice(0, 5).join("\n")}${toDelete.length > 5 ? "\n..." : ""}`}
                 closeModal={() => { }}
-                onConfirm={async (backup: boolean) => {
+                showDeleteGameFolder={true}
+                gamePath={toDelete.length === 1 ? toDelete[0].install_path : "Multiple paths"}
+                onConfirm={async (backup: boolean, deleteGameFolder: boolean) => {
                     setLoading(true);
                     for (const game of toDelete) {
                         await serverAPI.callPluginMethod("delete_prefix", {
                             appid: game.appid,
                             do_backup: backup,
+                            delete_game_folder: deleteGameFolder,
                         });
                     }
                     setLoading(false);
@@ -140,11 +164,14 @@ const PrefixManagerModal: VFC<{ serverAPI: ServerAPI; closeModal?: () => void }>
                 title="Delete Prefix"
                 message={`Delete prefix for ${game.name} (AppID: ${game.appid})?\nSize: ${game.size}\nStatus: ${game.prefix_status}`}
                 closeModal={() => { }}
-                onConfirm={async (backup) => {
+                showDeleteGameFolder={game.install_path !== "-" && !!game.install_path}
+                gamePath={game.install_path}
+                onConfirm={async (backup, deleteGameFolder) => {
                     setLoading(true);
                     await serverAPI.callPluginMethod("delete_prefix", {
                         appid: game.appid,
                         do_backup: backup,
+                        delete_game_folder: deleteGameFolder,
                     });
                     setLoading(false);
                     await fetchGames();
